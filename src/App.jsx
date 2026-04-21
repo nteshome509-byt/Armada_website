@@ -73,14 +73,22 @@ function App() {
       try {
         const response = await fetch("https://api.nbe.gov.et/api/filter-gold-rates");
         if (!response.ok) return;
-        const data = await response.json();
-        const usdRaw = data?.usd ?? data?.USD ?? data?.price_usd ?? data?.gold_usd;
-        const etbRaw = data?.etb ?? data?.ETB ?? data?.price_etb ?? data?.gold_etb;
+        const json = await response.json();
+        
+        // The API returns an array in json.data. We'll use the first one (usually 24k)
+        const goldData = json?.data && json.data.length > 0 ? json.data[0] : null;
+        if (!goldData) return;
+
+        const usdRaw = goldData.price_usd;
+        const etbRaw = goldData.price_birr;
+
         if (!usdRaw && !etbRaw) return;
+        
         const usdValue = usdRaw ? `$${Number(usdRaw).toFixed(2)}` : fallbackPrices[0].value;
         const etbValue = etbRaw
           ? `${Number(etbRaw).toLocaleString("en-US", { maximumFractionDigits: 2 })}`
           : fallbackPrices[1].value;
+          
         setGoldPrices([
           { currency: "USD", value: usdValue, note: "Per gram" },
           { currency: "ETB", value: etbValue, note: "Per gram" },
@@ -107,7 +115,6 @@ function App() {
             </div>
             <div className="brand-text-block">
               <span className="brand-name">Armada Mining</span>
-              <span className="brand-tagline">Gold · Ethiopia</span>
             </div>
           </a>
 
@@ -120,14 +127,10 @@ function App() {
             ))}
           </nav>
 
-          {/* Right: Ticker + CTA */}
+          {/* Right: Ticker */}
           <div className="header-right">
             <div className="gold-ticker" aria-label="Live gold price">
-              <div className="ticker-badge">
-                <span className="live-dot" aria-hidden="true" />
-                <span className="ticker-badge-text">LIVE</span>
-              </div>
-              <div className="ticker-sep" aria-hidden="true" />
+              <span className="ticker-description">Daily Gold Price</span>
               <div className="ticker-cards">
                 {goldPrices.map((item) => (
                   <div key={item.currency} className="ticker-card">
@@ -138,7 +141,6 @@ function App() {
                 ))}
               </div>
             </div>
-            <a className="header-cta" href="#contact">Get in Touch</a>
           </div>
 
           {/* Mobile hamburger */}
@@ -162,9 +164,6 @@ function App() {
                 {item.label}
               </a>
             ))}
-            <a href="#contact" className="mobile-cta" onClick={() => setMenuOpen(false)}>
-              Get in Touch
-            </a>
           </nav>
         )}
       </header>
