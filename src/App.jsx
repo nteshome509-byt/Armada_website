@@ -69,6 +69,24 @@ function App() {
   const scrolled = useScrolled();
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const fetchGoldRates = async () => {
       try {
         const response = await fetch("https://api.nbe.gov.et/api/filter-gold-rates");
@@ -200,7 +218,7 @@ function App() {
 
         {/* ─── ABOUT ─── */}
         <section id="about" className="section shell">
-          <div className="section-intro">
+          <div className="section-intro reveal">
             <p className="eyebrow">About Armada</p>
             <h2>Technology-first infrastructure,<br />built for execution</h2>
             <p>
@@ -212,7 +230,7 @@ function App() {
         {/* ─── WHY ARMADA ─── */}
         <section className="section section-soft">
           <div className="shell">
-            <div className="section-intro">
+            <div className="section-intro reveal">
               <p className="eyebrow">Why Armada</p>
               <h2>Bridging data and execution</h2>
               <p>
@@ -224,9 +242,11 @@ function App() {
 
         {/* ─── OUR ADVANTAGE ─── */}
         <section className="section shell">
-          <p className="eyebrow">Our Advantage</p>
-          <h2>Structured systems in a fragmented industry</h2>
-          <div className="card-grid">
+          <div className="section-intro reveal">
+            <p className="eyebrow">Our Advantage</p>
+            <h2>Structured systems in a fragmented industry</h2>
+          </div>
+          <div className="card-grid reveal">
             {advantages.map((adv) => (
               <article key={adv.title} className="service-card">
                 <h3>{adv.title}</h3>
@@ -239,12 +259,12 @@ function App() {
         {/* ─── MARKET OPPORTUNITY ─── */}
         <section className="section section-soft">
           <div className="shell">
-            <div className="section-intro">
+            <div className="section-intro reveal">
               <p className="eyebrow">Market Opportunity</p>
               <h2>Unlocking Ethiopia's gold potential</h2>
               <p>Ethiopia holds strong long-term mining potential, constrained by structural gaps:</p>
             </div>
-            <ul className="feature-list">
+            <ul className="feature-list reveal">
               <li>Limited access to reliable geological and operational data</li>
               <li>Fragmented small-scale mining operations</li>
               <li>Inefficient stakeholder coordination</li>
@@ -258,7 +278,7 @@ function App() {
 
         {/* ─── VISION ─── */}
         <section className="section shell">
-          <div className="section-intro">
+          <div className="section-intro reveal">
             <p className="eyebrow">Our Vision</p>
             <h2>A transparent, scalable mining industry</h2>
             <p>
@@ -270,11 +290,11 @@ function App() {
         {/* ─── SERVICES ─── */}
         <section id="services" className="section section-soft">
           <div className="shell">
-            <div className="section-intro">
+            <div className="section-intro reveal">
               <p className="eyebrow">Core Services</p>
               <h2>What we deliver</h2>
             </div>
-            <div className="card-grid services-grid">
+            <div className="card-grid services-grid reveal">
               {services.map((service) => (
                 <article key={service.title} className="service-card service-card--icon">
                   <span className="service-icon" aria-hidden="true">{service.icon}</span>
@@ -288,11 +308,11 @@ function App() {
 
         {/* ─── PROCESS ─── */}
         <section id="process" className="section shell">
-          <div className="section-intro">
+          <div className="section-intro reveal">
             <p className="eyebrow">How We Work</p>
             <h2>A disciplined operational model</h2>
           </div>
-          <div className="steps">
+          <div className="steps reveal">
             <article>
               <span>01</span>
               <h3>Build the Foundation</h3>
@@ -314,10 +334,10 @@ function App() {
         {/* ─── SNAPSHOT ─── */}
         <section className="section section-soft">
           <div className="shell">
-            <div className="section-intro">
+            <div className="section-intro reveal">
               <p className="eyebrow">Company Snapshot</p>
             </div>
-            <div className="snapshot-grid">
+            <div className="snapshot-grid reveal">
               {[
                 { label: "Founded", value: "2025" },
                 { label: "Team Size", value: "11–50" },
@@ -338,7 +358,7 @@ function App() {
         {/* ─── CONTACT ─── */}
         <section id="contact" className="section section-cta">
           <div className="shell">
-            <div className="cta-wrap">
+            <div className="cta-wrap reveal">
               <div className="cta-text">
                 <p className="eyebrow">Contact</p>
                 <h2>Ready to build together?</h2>
