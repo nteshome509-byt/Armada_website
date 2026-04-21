@@ -198,7 +198,7 @@ function App() {
           </div>
           <div className="shell hero-layout">
             <div className="hero-text">
-              <p className="eyebrow hero-eyebrow">Ethiopian Gold Mining — Redefined</p>
+              <p className="eyebrow hero-eyebrow">Ethiopian Gold Mining</p>
               <h1 className="hero-title">
                 Structured systems for responsible gold mining.
               </h1>
