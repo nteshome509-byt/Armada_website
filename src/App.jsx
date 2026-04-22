@@ -5,52 +5,80 @@ import heroImage from "../assets/heroimage.webp";
 
 const navItems = [
   { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
+  { label: "Opportunity", href: "#opportunity" },
+  { label: "Project", href: "#snapshot" },
+  { label: "ESG", href: "#esg" },
+  { label: "Investment", href: "#capital" },
+  { label: "Contact", href: "mailto:admin@armadaeth.com" },
 ];
 
 const fallbackPrices = [
-  { currency: "USD", value: "$106.45", note: "Per gram" },
-  { currency: "ETB", value: "13,924", note: "Per gram" },
+  { currency: "USD", value: "$85.45", note: "Daily Ref" },
+  { currency: "ETB", value: "11,200", note: "Daily Ref" },
 ];
 
-const services = [
-  {
-    icon: "◈",
-    title: "Mining Intelligence",
-    body: "Structured data and reporting that elevate project visibility and investment evaluation.",
-  },
-  {
-    icon: "◉",
-    title: "Exploration Planning",
-    body: "Field insights translated into focused, executable exploration strategies.",
-  },
-  {
-    icon: "◆",
-    title: "Production Systems",
-    body: "Operational frameworks engineered for safety, consistency, and peak performance.",
-  },
-  {
-    icon: "◌",
-    title: "Ecosystem Development",
-    body: "Cross-industry collaboration that strengthens Ethiopia's mining sector capacity.",
-  },
+const snapshot = [
+  { label: "Location", value: "Sherkole, Ethiopia" },
+  { label: "Throughput", value: "400 tonnes/day" },
+  { label: "Timeline", value: "8–12 Months" },
+  { label: "Strategy", value: "Tailings → Hard Rock" },
 ];
 
-const advantages = [
+const recoverySteps = [
+  { id: "01", title: "Feed Sourcing", description: "Tailings sourcing and QA/QC sampling." },
+  { id: "02", title: "Concentration", description: "Gravity concentration and classification." },
+  { id: "03", title: "Intensive Leaching", description: "Intensive leaching for high-efficiency recovery." },
+  { id: "04", title: "Gold Smelting", description: "Electrowinning and smelting in controlled room." },
+];
+
+const techAdvantages = [
   {
-    title: "Integrated Intelligence",
-    body: "Field data, mapping, and reporting unified into clear, actionable intelligence.",
+    title: "Intelligence-Led Systems",
+    description: "We convert field data and mapping into actionable operational insight, closing the information gap."
   },
   {
     title: "Operational Discipline",
-    body: "Standardized processes that improve safety, consistency, and production output.",
+    description: "Engineered processes that improve safety, consistency, and industrial-grade output."
   },
   {
     title: "Human Capital",
-    body: "Field teams trained and organized for strong execution and long-term sustainability.",
+    description: "Deep investment in talent. We train and organize teams to execute safely and consistently."
+  }
+];
+
+const corporateInfo = [
+  { label: "Founded", value: "2025" },
+  { label: "Headquarters", value: "Addis Ababa, ET" },
+  { label: "Company Size", value: "11-50 employees" },
+];
+
+const esgPrinciples = [
+  {
+    category: "Environmental",
+    details: "Reprocessing tailings reduces land disturbance and environmental waste legacy."
   },
+  {
+    category: "Social Impact",
+    details: "Supporting mining communities through training and disciplined workforce organization."
+  },
+  {
+    category: "Governance",
+    details: "Structured custody and formal revenue pathways integrated with NBE systems."
+  }
+];
+
+const benchmarkDetails = [
+  { category: "Daily Throughput", base: "200 t", optimal: "400 t" },
+  { category: "Est. Head Grade", base: "4.2 g/t", optimal: "5.5 g/t" },
+  { category: "Process Recovery", base: "32%", optimal: "45%" },
+  { category: "Monthly Output", base: "7.1 kg", optimal: "14.2 kg" },
+];
+
+const capitalAllocation = [
+  { area: "Plant & Equipment", percent: 45 },
+  { area: "Civil Works & Utilities", percent: 25 },
+  { area: "Gold Room & Security", percent: 15 },
+  { area: "Logistics & Ops", percent: 15 },
 ];
 
 function useScrolled(threshold = 20) {
@@ -70,6 +98,7 @@ function App() {
   const [goldPrices, setGoldPrices] = useState(fallbackPrices);
   const [menuOpen, setMenuOpen] = useState(false);
   const [heroVisible, setHeroVisible] = useState(true);
+  const [benchmarksOpen, setBenchmarksOpen] = useState(false);
   const heroRef = useRef(null);
   const scrolled = useScrolled(20);
   const showBackToTop = useScrolled(420);
@@ -126,8 +155,8 @@ function App() {
           : fallbackPrices[1].value;
 
         setGoldPrices([
-          { currency: "USD", value: usdValue, note: "Per gram" },
-          { currency: "ETB", value: etbValue, note: "Per gram" },
+          { currency: "USD", value: usdValue, note: "indicative" },
+          { currency: "ETB", value: etbValue, note: "indicative" },
         ]);
       } catch {
         // Keep fallback values.
@@ -144,8 +173,6 @@ function App() {
           heroVisible ? " site-header--transparent" : ""
         }`}
       >
-        <div className="header-stripe" aria-hidden="true" />
-
         <div className="shell nav-wrap">
           <a className="brand" href="#top" aria-label="Armada Mining">
             <div className="brand-icon">
@@ -213,184 +240,329 @@ function App() {
           </div>
           <div className="shell hero-layout">
             <div className="hero-text">
-              <p className="eyebrow hero-eyebrow">Ethiopian Gold Mining</p>
-              <h1 className="hero-title">Structured systems for responsible gold mining.</h1>
+              <div className="hero-badges">
+                <span className="badge-pill">Phase 1: Tailings Recovery</span>
+                <span className="badge-pill badge-outline">Phase 2: Hard Rock Expansion</span>
+              </div>
+              <h1 className="hero-title">Structured Gold Recovery Infrastructure for Ethiopia</h1>
               <p className="lead-copy">
-                Data, field intelligence, and disciplined execution unified into one operating model
-                that improves performance and transparency.
+                Armada Mining bridges the gap between geological potential and industrial execution,
+                converting field data into bankable, auditable gold production systems.
               </p>
+
+              {/* Structured Project Location Block */}
+              <div className="hero-project-meta">
+                <div className="project-meta-item">
+                  <span className="meta-label">Project Location</span>
+                  <span className="meta-value">Sherkole Gold Belt, Ethiopia</span>
+                </div>
+                <div className="project-meta-item">
+                  <span className="meta-label">Region</span>
+                  <span className="meta-value">Benishangul-Gumuz</span>
+                </div>
+                <div className="project-meta-item">
+                  <span className="meta-label">Strategy</span>
+                  <span className="meta-value">Tailings Recovery + Hard Rock Expansion</span>
+                </div>
+              </div>
+
+              {/* Gold Market Reference — institutional framing */}
+              <div className="hero-market-ref">
+                <span className="market-ref-label">Gold Benchmark (Market Reference)</span>
+                <div className="market-ref-prices">
+                  {goldPrices.map((p) => (
+                    <span key={p.currency} className="market-ref-price">
+                      <strong>{p.currency}</strong> {p.value}/g
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Hierarchy */}
               <div className="hero-actions">
-                <a className="button button-accent" href="#contact">
-                  Get in Touch
+                <a className="button button-accent" href="#capital">
+                  Partner With Us
                 </a>
-                <a className="button button-ghost" href="#services">
-                  Our Services
+                <a className="button button-ghost" href="#snapshot">
+                  View Project Overview
                 </a>
               </div>
+
+              {/* Trust Signals */}
+              <div className="hero-trust">
+                <span className="trust-item">📋 Phase 1: USD 2.5M Structured Capital Raise</span>
+                <span className="trust-divider">·</span>
+                <span className="trust-item">👥 11–50 Member Technical Team</span>
+                <span className="trust-divider">·</span>
+                <span className="trust-item">🇪🇹 Ethiopia-Based Operations</span>
+              </div>
+
+              {/* Subtle tertiary action */}
+              <a className="hero-deck-link" href="mailto:invest@armadaeth.com">
+                Request Investor Brief →
+              </a>
+
             </div>
-            <aside className="hero-price-panel" aria-label="Live gold prices">
-              <div className="hero-price-panel__header">
-                <p className="eyebrow hero-price-eyebrow">Live Gold Prices</p>
-                <span className="price-live-pill">Updated now</span>
-              </div>
-              <div className="hero-price-panel__body">
-                {goldPrices.map((item) => (
-                  <div key={item.currency} className="hero-price-card">
-                    <span className="hero-price-currency">{item.currency}</span>
-                    <strong className="hero-price-value">{item.value}</strong>
-                    <span className="hero-price-note">{item.note}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="hero-price-caption">
-                Current benchmark prices shown on the home page for quick reference.
-              </p>
-            </aside>
+            {/* Subtle Ticker in Hero - but only on desktop maybe? Standardizing as per user's 'subtle' advice */}
           </div>
         </section>
 
         <section id="about" className="section shell">
           <div className="section-intro reveal">
             <p className="eyebrow">About Armada</p>
-            <h2>
-              Technology-first infrastructure,
-              <br />
-              built for execution
-            </h2>
-            <p>
-              Armada Mining is a technology-driven company advancing Ethiopian gold mining through
-              precise data, geological mapping, and disciplined field execution.
+            <h2>Closing the Information Gap</h2>
+            <p className="description-text">
+              Armada Mining is a technology-first platform for Ethiopian gold mining. 
+              We solve the intelligence deficit that slows investors down, turning field data into 
+              modern execution: from exploration planning to disciplined production.
+            </p>
+            <p className="description-text">
+              By combining data, mapping, and standardized operating systems, we bring institutional 
+              clarity to a traditionally disorganized sector.
             </p>
           </div>
         </section>
 
-        <section className="section section-soft">
+        <section id="opportunity" className="section section-soft">
           <div className="shell">
             <div className="section-intro reveal">
-              <p className="eyebrow">Why Armada</p>
-              <h2>Bridging data and execution</h2>
-              <p>
-                We unify mining intelligence, standardized systems, and trained teams into one
-                operating model delivering consistency, risk control, and measurable results.
+              <p className="eyebrow">The Opportunity</p>
+              <h2>Tailings as a Recoverable Asset</h2>
+              <p className="description-text">
+                Ethiopia hosts one of the region’s largest artisanal gold economies, yet most of its
+                recoverable gold is lost to low-efficiency processing. Tailings — the residue left behind —
+                represent a large, accessible, and underutilized resource.
               </p>
+              <div className="insight-box">
+                <h3>Why Tailings First?</h3>
+                <p>
+                  Reprocessing tailings requires no new excavation, delivers faster deployment,
+                  and generates early cash flow while funding Phase 2 hard-rock infrastructure.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section shell">
+        <section id="model" className="section shell">
           <div className="section-intro reveal">
-            <p className="eyebrow">Our Advantage</p>
-            <h2>Structured systems in a fragmented industry</h2>
+            <p className="eyebrow">The Armada Model</p>
+            <h2>Two Phases. One Platform.</h2>
+          </div>
+          <div className="model-grid reveal">
+            <div className="model-card">
+              <div className="card-header">
+                <span className="phase-mark">Phase 1</span>
+                <h3>Tailings Recovery</h3>
+              </div>
+              <ul className="accent-list">
+                <li>Fast deployment (8–12 months)</li>
+                <li>Lower capital requirements</li>
+                <li>Early cash flow generation</li>
+              </ul>
+            </div>
+            <div className="model-card">
+              <div className="card-header">
+                <span className="phase-mark secondary">Phase 2</span>
+                <h3>Hard Rock Expansion</h3>
+              </div>
+              <ul className="accent-list">
+                <li>Built on Phase 1 infrastructure</li>
+                <li>No full rebuild required</li>
+                <li>Scalable long-term production</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="snapshot" className="section section-soft">
+          <div className="shell">
+            <div className="section-intro reveal">
+              <p className="eyebrow">Project Snapshot</p>
+              <h2>The Sherkole Platform</h2>
+            </div>
+            <div className="snapshot-grid reveal">
+              {snapshot.map((item) => (
+                <div key={item.label} className="metric-card">
+                  <p>{item.label}</p>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </div>
+            <p className="resolve-note reveal">
+              This is a controlled recovery platform, not a traditional mine build.
+            </p>
+          </div>
+        </section>
+
+        <section id="production" className="section shell">
+          <div className="section-intro reveal">
+            <p className="eyebrow">Production & Commercial</p>
+            <h2>The Output Framework</h2>
+          </div>
+
+          <div className="production-split reveal">
+            <div className="process-block">
+              <h3>Recovery Process</h3>
+              <div className="process-list">
+                {recoverySteps.map((step) => (
+                  <div key={step.id} className="process-item">
+                    <div className="process-id">{step.id}</div>
+                    <div className="process-content">
+                      <h4>{step.title}</h4>
+                      <p>{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="commercial-block">
+              <h3>From Gold to Revenue</h3>
+              <div className="commercial-flow">
+                {[
+                  { icon: "🛡️", text: "Controlled gold room handling" },
+                  { icon: "🚛", text: "Logged custody and dispatch" },
+                  { icon: "🏦", text: "Sale through National Bank of Ethiopia" },
+                  { icon: "💰", text: "Assay-based settlement" },
+                ].map((item, idx) => (
+                  <div key={idx} className="flow-node">
+                    <span className="node-icon">{item.icon}</span>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="framework-detail reveal">
+            <button
+              className="details-toggle"
+              onClick={() => setBenchmarksOpen(!benchmarksOpen)}
+            >
+              {benchmarksOpen ? "Hide Operational Benchmarks" : "View Operational Benchmarks"}
+            </button>
+
+            {benchmarksOpen && (
+              <div className="benchmarks-table-wrap">
+                <table className="benchmarks-table">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Base Case</th>
+                      <th>Optimal Case</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {benchmarkDetails.map((row) => (
+                      <tr key={row.category}>
+                        <td>{row.category}</td>
+                        <td>{row.base}</td>
+                        <td>{row.optimal}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section id="tech" className="section section-soft">
+          <div className="shell">
+            <div className="section-intro reveal">
+              <p className="eyebrow">The Armada Advantage</p>
+              <h2>Institutional Control & Execution</h2>
+            </div>
+            <div className="card-grid reveal">
+              {techAdvantages.map((item) => (
+                <div key={item.title} className="service-card">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="esg" className="section shell">
+          <div className="section-intro reveal">
+            <p className="eyebrow">Responsible Mining</p>
+            <h2>Sustainable Gold Production</h2>
+            <p className="description-text">
+              Armada Mining is committed to transparent and sustainable operations that integrate Environmental, Social, and Governance principles into every stage.
+            </p>
           </div>
           <div className="card-grid reveal">
-            {advantages.map((adv) => (
-              <article key={adv.title} className="service-card">
-                <h3>{adv.title}</h3>
-                <p>{adv.body}</p>
-              </article>
+            {esgPrinciples.map((item) => (
+              <div key={item.category} className="service-card service-card--icon">
+                <div className="service-icon">
+                  {item.category === "Environmental" ? "🌿" : item.category === "Social Impact" ? "🤝" : "🏛️"}
+                </div>
+                <h3>{item.category}</h3>
+                <p>{item.details}</p>
+              </div>
             ))}
           </div>
         </section>
 
-        <section id="services" className="section section-soft">
+        <section id="market" className="section section-soft">
           <div className="shell">
             <div className="section-intro reveal">
-              <p className="eyebrow">Core Services</p>
-              <h2>What we deliver</h2>
-            </div>
-            <div className="card-grid services-grid reveal">
-              {services.map((service) => (
-                <article key={service.title} className="service-card service-card--icon">
-                  <span className="service-icon" aria-hidden="true">
-                    {service.icon}
-                  </span>
-                  <h3>{service.title}</h3>
-                  <p>{service.body}</p>
-                </article>
-              ))}
+              <p className="eyebrow">Market Opportunity</p>
+              <h2>Addressing the Infrastructure Gap</h2>
+              <p className="description-text">
+                Ethiopia’s mining sector has significant structural gaps that limit investor confidence and operational efficiency:
+              </p>
+              <ul className="feature-list reveal">
+                <li>No standardized field data or geological reporting</li>
+                <li>Fragmented small-scale operations with no formal coordination</li>
+                <li>Low adoption of modern recovery and processing technology</li>
+                <li>Limited formal pathways for investor-grade due diligence</li>
+              </ul>
             </div>
           </div>
         </section>
 
-        <section id="process" className="section shell">
-          <div className="section-intro reveal">
-            <p className="eyebrow">How We Work</p>
-            <h2>A disciplined operational model</h2>
-          </div>
-          <div className="steps reveal">
-            <article>
-              <span>01</span>
-              <h3>Build the Foundation</h3>
-              <p>Practical field execution grounded in proven methods and strong operational discipline.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Improve Through Insight</h3>
-              <p>Geological understanding and structured data applied to sharpen every decision.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Scale Responsibly</h3>
-              <p>Operations expanded with safety, discipline, and long-term value creation at the core.</p>
-            </article>
+        <section id="vision" className="section shell">
+          <div className="section-intro reveal text-center">
+            <p className="eyebrow">Our Vision</p>
+            <h2 className="vision-title">
+              To transform Ethiopian gold mining into a standardized, transparent, and scalable industry.
+            </h2>
+            <p className="vision-sub reveal">
+              Armada is active in industry coordination, expert networks, and sector advocacy — 
+              because lasting value requires a stronger ecosystem, not just a single project.
+            </p>
           </div>
         </section>
 
-        <section className="section section-soft">
+        <section id="capital" className="section section-investment">
           <div className="shell">
-            <div className="section-intro reveal">
-              <p className="eyebrow">Company Snapshot</p>
+            <div className="investment-header reveal">
+              <p className="eyebrow">Build With Us</p>
+              <h2>Establishing a Scalable Recovery Platform</h2>
+              <p className="investment-lead">
+                Armada Mining is establishing a recovery platform in one of Ethiopia’s most active gold corridors.
+                We welcome collaboration with investors, operators, and strategic partners.
+              </p>
             </div>
-            <div className="snapshot-grid reveal">
-              {[
-                { label: "Founded", value: "2025" },
-                { label: "Team Size", value: "11-50" },
-                { label: "Headquarters", value: "Addis Ababa, Ethiopia" },
-                { label: "Industry", value: "Gold Mining" },
-                { label: "Website", value: "armadaeth.com" },
-                { label: "Phone", value: "+251 911 967 525" },
-              ].map((m) => (
-                <article key={m.label} className="metric-card">
-                  <p>{m.label}</p>
-                  <strong>{m.value}</strong>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        <section id="contact" className="section section-cta">
-          <div className="shell">
-            <div className="cta-wrap reveal">
-              <div className="cta-text">
-                <p className="eyebrow">Contact</p>
-                <h2>Ready to build together?</h2>
-                <p>We welcome collaboration with investors, operators, and industry partners.</p>
-                <ul className="contact-list">
-                  <li>
-                    <span>🌐</span>
-                    <a href="https://armadaeth.com">armadaeth.com</a>
-                  </li>
-                  <li>
-                    <span>📞</span>
-                    <a href="tel:+251911967525">+251 911 967 525</a>
-                  </li>
-                  <li>
-                    <span>✉️</span>
-                    <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
-                  </li>
-                  <li>
-                    <span>📍</span>
-                    <span>Addis Ababa, Ethiopia</span>
-                  </li>
-                </ul>
+            <div className="investment-content reveal">
+              <div className="allocation-grid">
+                {capitalAllocation.map((item) => (
+                  <div key={item.area} className="allocation-item">
+                    <div className="allocation-bar" style={{ width: `${item.percent}%` }} />
+                    <div className="allocation-text">
+                      <span>{item.area}</span>
+                      <strong>{item.percent}%</strong>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="contact-actions">
-                <a className="button button-accent" href="tel:+251911967525">
-                  Call Now
-                </a>
-                <a className="button button-outline" href="mailto:admin@armadaeth.com">
-                  Send Email
+              <div className="investment-actions">
+                <a className="button button-accent button-large" href="mailto:invest@armadaeth.com">
+                  Request Investment Details
                 </a>
               </div>
             </div>
@@ -398,15 +570,22 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="shell footer-wrap">
+      <footer className="footer shell">
+        <div className="footer-wrap">
           <div className="footer-brand">
-            <img src={headerLogo} alt="Armada Mining" className="footer-logo" />
-            <p>© 2026 Armada Mining PLC. All rights reserved.</p>
+            <img src={headerLogo} alt="Armada" className="footer-logo" />
+            <div className="corporate-meta">
+              {corporateInfo.map((info) => (
+                <span key={info.label}>
+                  {info.label}: {info.value}
+                </span>
+              ))}
+            </div>
           </div>
-          <a href="#top" className="back-top">
-            ↑ Back to top
-          </a>
+          <div className="footer-legal">
+            <p>© 2025 Armada Mining. All rights reserved.</p>
+            <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
+          </div>
         </div>
       </footer>
 
