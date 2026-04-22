@@ -39,6 +39,20 @@ To run the platform on your own machine, you will need [Node.js](https://nodejs.
    ```
    Open your browser and navigate to `http://localhost:5174/` (or the port Vite provides) to view the live site.
 
+## 🐳 Running with Docker
+
+If you prefer not to install Node locally, you can run the site inside Docker:
+
+1. **Build and start the container**
+   ```bash
+   docker compose up --build
+   ```
+
+2. **Open the site**
+   Visit `http://localhost:5173/`
+
+The container runs the Vite dev server and mounts the project directory, so code changes are reflected automatically.
+
 ## 📦 Deployment (Vercel)
 This project is configured to be deployed automatically on **Vercel**. 
 Whenever you push to the `main` branch, Vercel will trigger a build utilizing the command:
