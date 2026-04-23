@@ -9,7 +9,7 @@ const navItems = [
   { label: "Project", href: "#snapshot" },
   { label: "ESG", href: "#esg" },
   { label: "Investment", href: "#capital" },
-  { label: "Contact", href: "mailto:admin@armadaeth.com" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const fallbackPrices = [
@@ -96,6 +96,14 @@ function useScrolled(threshold = 20) {
 
 function App() {
   const [goldPrices, setGoldPrices] = useState(fallbackPrices);
+  const [copiedType, setCopiedType] = useState(null);
+
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedType(type);
+      setTimeout(() => setCopiedType(null), 2000);
+    });
+  };
   const [menuOpen, setMenuOpen] = useState(false);
   const [heroVisible, setHeroVisible] = useState(true);
   const [benchmarksOpen, setBenchmarksOpen] = useState(false);
@@ -170,7 +178,7 @@ function App() {
     <div className="site-shell">
       <header
         className={`site-header${scrolled ? " scrolled" : ""}${
-          heroVisible ? " site-header--transparent" : ""
+          !scrolled ? " site-header--transparent" : ""
         }`}
       >
         <div className="shell nav-wrap">
@@ -251,7 +259,7 @@ function App() {
               </p>
 
               {/* Structured Project Location Block */}
-              <div className="hero-project-meta">
+              <div className="hero-project-meta reveal reveal-stagger">
                 <div className="project-meta-item">
                   <span className="meta-label">Project Location</span>
                   <span className="meta-value">Sherkole Gold Belt, Ethiopia</span>
@@ -349,7 +357,7 @@ function App() {
             <p className="eyebrow">The Armada Model</p>
             <h2>Two Phases. One Platform.</h2>
           </div>
-          <div className="model-grid reveal">
+          <div className="model-grid reveal reveal-stagger">
             <div className="model-card">
               <div className="card-header">
                 <span className="phase-mark">Phase 1</span>
@@ -381,7 +389,7 @@ function App() {
               <p className="eyebrow">Project Snapshot</p>
               <h2>The Sherkole Platform</h2>
             </div>
-            <div className="snapshot-grid reveal">
+            <div className="snapshot-grid reveal reveal-stagger">
               {snapshot.map((item) => (
                 <div key={item.label} className="metric-card">
                   <p>{item.label}</p>
@@ -401,7 +409,7 @@ function App() {
             <h2>The Output Framework</h2>
           </div>
 
-          <div className="production-split reveal">
+          <div className="production-split reveal reveal-stagger">
             <div className="process-block">
               <h3>Recovery Process</h3>
               <div className="process-list">
@@ -474,7 +482,7 @@ function App() {
               <p className="eyebrow">The Armada Advantage</p>
               <h2>Institutional Control & Execution</h2>
             </div>
-            <div className="card-grid reveal">
+            <div className="card-grid reveal reveal-stagger">
               {techAdvantages.map((item) => (
                 <div key={item.title} className="service-card">
                   <h3>{item.title}</h3>
@@ -493,7 +501,7 @@ function App() {
               Armada Mining is committed to transparent and sustainable operations that integrate Environmental, Social, and Governance principles into every stage.
             </p>
           </div>
-          <div className="card-grid reveal">
+          <div className="card-grid reveal reveal-stagger">
             {esgPrinciples.map((item) => (
               <div key={item.category} className="service-card service-card--icon">
                 <div className="service-icon">
@@ -549,7 +557,7 @@ function App() {
             </div>
 
             <div className="investment-content reveal">
-              <div className="allocation-grid">
+              <div className="allocation-grid reveal reveal-stagger">
                 {capitalAllocation.map((item) => (
                   <div key={item.area} className="allocation-item">
                     <div className="allocation-bar" style={{ width: `${item.percent}%` }} />
@@ -564,6 +572,51 @@ function App() {
                 <a className="button button-accent button-large" href="mailto:invest@armadaeth.com">
                   Request Investment Details
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="contact" className="section section-soft">
+          <div className="shell">
+            <div className="cta-wrap reveal">
+              <div className="cta-text">
+                <p className="eyebrow">Get in Touch</p>
+                <h2>Contact Our Operations Team</h2>
+                <p className="description-text">
+                  Reach out to discuss infrastructure partnerships, technical inquiries, or institutional investment opportunities.
+                </p>
+                <ul className="contact-list">
+                  <li>
+                    🌐 <a href="https://armadaeth.com" target="_blank" rel="noopener noreferrer">armadaeth.com</a>
+                  </li>
+                  <li>
+                    📞 <a href="tel:+251911967525">+251 911 967 525</a>
+                  </li>
+                  <li>
+                    ✉️ <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
+                  </li>
+                  <li>
+                    📍 <span>Addis Ababa, Ethiopia</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="contact-actions" style={{ position: "relative", zIndex: 1000, pointerEvents: "auto", display: "flex", gap: "16px", marginTop: "32px" }}>
+                <button 
+                  type="button"
+                  className="button button-accent" 
+                  onClick={() => handleCopy("admin@armadaeth.com", "email")}
+                  style={{ cursor: "pointer", pointerEvents: "auto", position: "relative", zIndex: 1001 }}
+                >
+                  {copiedType === "email" ? "✓ Email Copied!" : "Copy Email Address"}
+                </button>
+                <button 
+                  type="button"
+                  className="button button-outline" 
+                  onClick={() => handleCopy("+251911967525", "phone")}
+                  style={{ cursor: "pointer", pointerEvents: "auto", position: "relative", zIndex: 1001 }}
+                >
+                  {copiedType === "phone" ? "✓ Phone Copied!" : "Copy Phone Number"}
+                </button>
               </div>
             </div>
           </div>
