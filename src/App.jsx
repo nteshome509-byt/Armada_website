@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import pattern from "../assets/pattern.svg";
 import headerLogo from "../assets/Logo for hed.svg";
 import heroImage from "../assets/heroimage.webp";
+import imgProcessingPlant from "../assets/image_2026-04-16_16-13-03.png";
+import imgMiningWorkers from "../assets/image_2026-04-16_19-36-44.png";
+import imgGoldFlakes from "../assets/image_2026-04-16_16-14-43.png";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -177,9 +180,7 @@ function App() {
   return (
     <div className="site-shell">
       <header
-        className={`site-header${scrolled ? " scrolled" : ""}${
-          !scrolled ? " site-header--transparent" : ""
-        }`}
+        className={`site-header scrolled`}
       >
         <div className="shell nav-wrap">
           <a className="brand" href="#top" aria-label="Armada Mining">
@@ -196,22 +197,11 @@ function App() {
             ))}
           </nav>
 
-          {showHeaderGoldPrice && (
-            <div className="header-right">
-              <div className="gold-ticker" aria-label="Live gold price">
-                <span className="ticker-description">Daily Gold Price</span>
-                <div className="ticker-cards">
-                  {goldPrices.map((item) => (
-                    <div key={item.currency} className="ticker-card">
-                      <span className="ticker-currency">{item.currency}</span>
-                      <strong className="ticker-value">{item.value}</strong>
-                      <span className="ticker-unit">/g</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+          <div className="header-right">
+            <a href="mailto:invest@armadaeth.com" className="header-cta">
+              Request Investor Brief
+            </a>
+          </div>
 
           <button
             type="button"
@@ -233,85 +223,91 @@ function App() {
                 {item.label}
               </a>
             ))}
+            <a
+              href="mailto:invest@armadaeth.com"
+              className="mobile-menu-cta"
+              onClick={() => setMenuOpen(false)}
+            >
+              Request Investor Brief
+            </a>
           </nav>
         )}
       </header>
 
       <main>
-        <section id="top" ref={heroRef} className="hero">
-          <div className="hero-media" aria-hidden="true">
-            <img src={heroImage} alt="" />
-          </div>
-          <div className="hero-overlay" aria-hidden="true" />
-          <div className="hero-pattern" aria-hidden="true">
-            <img src={pattern} alt="" />
-          </div>
-          <div className="shell hero-layout">
-            <div className="hero-text">
-              <div className="hero-badges">
-                <span className="badge-pill">Phase 1: Tailings Recovery</span>
-                <span className="badge-pill badge-outline">Phase 2: Hard Rock Expansion</span>
-              </div>
-              <h1 className="hero-title">Structured Gold Recovery Infrastructure for Ethiopia</h1>
-              <p className="lead-copy">
-                Armada Mining bridges the gap between geological potential and industrial execution,
-                converting field data into bankable, auditable gold production systems.
+        <section id="top" ref={heroRef} className="hero-v2">
+          <div className="shell hero-layout-v2">
+
+            {/* ── LEFT COLUMN ── */}
+            <div className="hero-text-v2">
+              <span className="hero-top-label-v2">STRUCTURED. AUDITABLE. REVENUE-FOCUSED.</span>
+              <h1 className="hero-title-v2">
+                Turn Untapped{" "}
+                <span className="hero-title-gold">Gold Deposits</span>{" "}
+                into Bankable Production
+              </h1>
+              <p className="lead-copy-v2">
+                Armada Mining transforms geological potential into auditable, industrial gold output—bridging the gap between field data and profitable production.
               </p>
 
-              {/* Structured Project Location Block */}
-              <div className="hero-project-meta reveal reveal-stagger">
-                <div className="project-meta-item">
-                  <span className="meta-label">Project Location</span>
-                  <span className="meta-value">Sherkole Gold Belt, Ethiopia</span>
-                </div>
-                <div className="project-meta-item">
-                  <span className="meta-label">Region</span>
-                  <span className="meta-value">Benishangul-Gumuz</span>
-                </div>
-                <div className="project-meta-item">
-                  <span className="meta-label">Strategy</span>
-                  <span className="meta-value">Tailings Recovery + Hard Rock Expansion</span>
-                </div>
-              </div>
-
-              {/* Gold Market Reference — institutional framing */}
-              <div className="hero-market-ref">
-                <span className="market-ref-label">Gold Benchmark (Market Reference)</span>
-                <div className="market-ref-prices">
-                  {goldPrices.map((p) => (
-                    <span key={p.currency} className="market-ref-price">
-                      <strong>{p.currency}</strong> {p.value}/g
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA Hierarchy */}
-              <div className="hero-actions">
-                <a className="button button-accent" href="#capital">
-                  Partner With Us
+              <div className="hero-actions-v2">
+                <a className="btn-gold-primary" href="mailto:invest@armadaeth.com">
+                  Request Investor Brief <span aria-hidden="true">→</span>
                 </a>
-                <a className="button button-ghost" href="#snapshot">
+                <a className="btn-outline-dark" href="#snapshot">
                   View Project Overview
                 </a>
               </div>
 
-              {/* Trust Signals */}
-              <div className="hero-trust">
-                <span className="trust-item">📋 Phase 1: USD 2.5M Structured Capital Raise</span>
-                <span className="trust-divider">·</span>
-                <span className="trust-item">👥 11–50 Member Technical Team</span>
-                <span className="trust-divider">·</span>
-                <span className="trust-item">🇪🇹 Ethiopia-Based Operations</span>
+              <div className="hero-trust-row">
+                <div className="trust-item-v2">
+                  <span className="trust-icon-v2">📍</span>
+                  <span>Sherkole Gold Belt, Ethiopia</span>
+                </div>
+                <div className="trust-item-v2">
+                  <span className="trust-icon-v2">📋</span>
+                  <span>Phase 1: Tailings Recovery (Low CapEx, Fast ROI)</span>
+                </div>
+                <div className="trust-item-v2">
+                  <span className="trust-icon-v2">👥</span>
+                  <span>11–50 Technical Team, Ethiopia-Based Operations</span>
+                </div>
               </div>
-
-              {/* Subtle tertiary action */}
-              <a className="hero-deck-link" href="mailto:invest@armadaeth.com">
-                Request Investor Brief →
-              </a>
-
             </div>
-            {/* Subtle Ticker in Hero - but only on desktop maybe? Standardizing as per user's 'subtle' advice */}
+
+            {/* ── RIGHT COLUMN — contained image + card ── */}
+            <div className="hero-image-col">
+              <img
+                src={imgProcessingPlant}
+                alt="Armada Mining processing plant, Benishangul-Gumuz, Ethiopia"
+                className="hero-right-img"
+              />
+              <div className="boc-card">
+                <div className="boc-header">
+                  <span className="boc-icon">📈</span>
+                  <span className="boc-title">Gold Market Benchmark</span>
+                </div>
+                <div className="boc-row">
+                  <span className="boc-label">USD / gram</span>
+                  <span className="boc-value boc-usd">
+                    {goldPrices.find(p => p.currency === 'USD')?.value || '$85.45'}
+                  </span>
+                </div>
+                <div className="boc-row">
+                  <span className="boc-label">ETB / gram</span>
+                  <span className="boc-value boc-etb">
+                    {goldPrices.find(p => p.currency === 'ETB')?.value
+                      ? `ETB ${goldPrices.find(p => p.currency === 'ETB').value}`
+                      : 'ETB 11,200'}
+                  </span>
+                </div>
+                <div className="boc-footer">
+                  <span className="boc-live-dot" />
+                  Live pricing for investor reference
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -333,24 +329,37 @@ function App() {
 
         <section id="opportunity" className="section section-soft">
           <div className="shell">
-            <div className="section-intro reveal">
-              <p className="eyebrow">The Opportunity</p>
-              <h2>Tailings as a Recoverable Asset</h2>
-              <p className="description-text">
-                Ethiopia hosts one of the region’s largest artisanal gold economies, yet most of its
-                recoverable gold is lost to low-efficiency processing. Tailings — the residue left behind —
-                represent a large, accessible, and underutilized resource.
-              </p>
-              <div className="insight-box">
-                <h3>Why Tailings First?</h3>
-                <p>
-                  Reprocessing tailings requires no new excavation, delivers faster deployment,
-                  and generates early cash flow while funding Phase 2 hard-rock infrastructure.
+            <div className="opportunity-split reveal">
+              <div className="opportunity-text">
+                <p className="eyebrow">The Opportunity</p>
+                <h2>Tailings as a Recoverable Asset</h2>
+                <p className="description-text">
+                  Ethiopia hosts one of the region's largest artisanal gold economies, yet most of its
+                  recoverable gold is lost to low-efficiency processing. Tailings — the residue left behind —
+                  represent a large, accessible, and underutilized resource.
                 </p>
+                <div className="insight-box">
+                  <h3>Why Tailings First?</h3>
+                  <p>
+                    Reprocessing tailings requires no new excavation, delivers faster deployment,
+                    and generates early cash flow while funding Phase 2 hard-rock infrastructure.
+                  </p>
+                </div>
+              </div>
+              <div className="opportunity-img-col">
+                <img
+                  src={imgMiningWorkers}
+                  alt="Artisanal gold miners at Sherkole, Ethiopia"
+                  className="opportunity-img"
+                />
+                <div className="opportunity-img-caption">
+                  Artisanal miners at the Sherkole Gold Belt — the untapped opportunity Armada is structuring.
+                </div>
               </div>
             </div>
           </div>
         </section>
+
 
         <section id="model" className="section shell">
           <div className="section-intro reveal">
@@ -368,6 +377,10 @@ function App() {
                 <li>Lower capital requirements</li>
                 <li>Early cash flow generation</li>
               </ul>
+              <div className="card-visual">
+                <img src={imgGoldFlakes} alt="Recovered gold flakes" className="card-img" />
+                <span className="card-img-label">Proven Recovery Output</span>
+              </div>
             </div>
             <div className="model-card">
               <div className="card-header">
@@ -623,21 +636,77 @@ function App() {
         </section>
       </main>
 
-      <footer className="footer shell">
-        <div className="footer-wrap">
-          <div className="footer-brand">
-            <img src={headerLogo} alt="Armada" className="footer-logo" />
-            <div className="corporate-meta">
-              {corporateInfo.map((info) => (
-                <span key={info.label}>
-                  {info.label}: {info.value}
-                </span>
-              ))}
+      <footer className="site-footer">
+        <div className="shell">
+          <div className="footer-grid">
+            {/* Column 1: Brand */}
+            <div className="footer-col brand-col">
+              <img src={headerLogo} alt="Armada Mining" className="footer-logo" />
+              <p className="footer-tagline">
+                Transforming geological potential into bankable production.
+                Institutional clarity for the Ethiopian mining sector.
+              </p>
+              <div className="footer-social">
+                <a href="#" aria-label="LinkedIn" className="social-link">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="X (Twitter)" className="social-link">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: Navigation */}
+            <div className="footer-col">
+              <h4 className="footer-title">Navigation</h4>
+              <ul className="footer-links">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <a href={item.href}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Corporate */}
+            <div className="footer-col">
+              <h4 className="footer-title">Corporate</h4>
+              <ul className="footer-info-list">
+                {corporateInfo.map((info) => (
+                  <li key={info.label}>
+                    <span className="info-label">{info.label}:</span>
+                    <span className="info-value">{info.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Contact */}
+            <div className="footer-col">
+              <h4 className="footer-title">Contact</h4>
+              <ul className="footer-contact-info">
+                <li>
+                  <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
+                </li>
+                <li>
+                  <a href="tel:+251911967525">+251 911 967 525</a>
+                </li>
+                <li>Addis Ababa, Ethiopia</li>
+              </ul>
             </div>
           </div>
-          <div className="footer-legal">
-            <p>© 2025 Armada Mining. All rights reserved.</p>
-            <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
+
+          <div className="footer-bottom">
+            <p className="copyright">© {new Date().getFullYear()} Armada Mining. All rights reserved.</p>
+            <div className="footer-legal-links">
+              <a href="#">Privacy Policy</a>
+              <span className="separator">•</span>
+              <a href="#">Terms of Service</a>
+            </div>
           </div>
         </div>
       </footer>
