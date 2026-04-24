@@ -636,21 +636,77 @@ function App() {
         </section>
       </main>
 
-      <footer className="footer shell">
-        <div className="footer-wrap">
-          <div className="footer-brand">
-            <img src={headerLogo} alt="Armada" className="footer-logo" />
-            <div className="corporate-meta">
-              {corporateInfo.map((info) => (
-                <span key={info.label}>
-                  {info.label}: {info.value}
-                </span>
-              ))}
+      <footer className="site-footer">
+        <div className="shell">
+          <div className="footer-grid">
+            {/* Column 1: Brand */}
+            <div className="footer-col brand-col">
+              <img src={headerLogo} alt="Armada Mining" className="footer-logo" />
+              <p className="footer-tagline">
+                Transforming geological potential into bankable production.
+                Institutional clarity for the Ethiopian mining sector.
+              </p>
+              <div className="footer-social">
+                <a href="#" aria-label="LinkedIn" className="social-link">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="X (Twitter)" className="social-link">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: Navigation */}
+            <div className="footer-col">
+              <h4 className="footer-title">Navigation</h4>
+              <ul className="footer-links">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <a href={item.href}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Corporate */}
+            <div className="footer-col">
+              <h4 className="footer-title">Corporate</h4>
+              <ul className="footer-info-list">
+                {corporateInfo.map((info) => (
+                  <li key={info.label}>
+                    <span className="info-label">{info.label}:</span>
+                    <span className="info-value">{info.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Contact */}
+            <div className="footer-col">
+              <h4 className="footer-title">Contact</h4>
+              <ul className="footer-contact-info">
+                <li>
+                  <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
+                </li>
+                <li>
+                  <a href="tel:+251911967525">+251 911 967 525</a>
+                </li>
+                <li>Addis Ababa, Ethiopia</li>
+              </ul>
             </div>
           </div>
-          <div className="footer-legal">
-            <p>© 2025 Armada Mining. All rights reserved.</p>
-            <a href="mailto:admin@armadaeth.com">admin@armadaeth.com</a>
+
+          <div className="footer-bottom">
+            <p className="copyright">© {new Date().getFullYear()} Armada Mining. All rights reserved.</p>
+            <div className="footer-legal-links">
+              <a href="#">Privacy Policy</a>
+              <span className="separator">•</span>
+              <a href="#">Terms of Service</a>
+            </div>
           </div>
         </div>
       </footer>
